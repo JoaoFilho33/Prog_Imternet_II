@@ -18,11 +18,9 @@ public class HelloController {
 
     @GetMapping("/teste/{id}")
     public String getTesteById(@PathVariable Long id, Model model) {
-        // Aqui você pode recuperar os dados do recurso com o ID fornecido
-        // e adicionar os dados ao modelo antes de retornar o template "teste"
+
         return "teste";
     }
-
 
 
 }

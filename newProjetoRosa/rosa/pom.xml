@@ -84,7 +84,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.name}</finalName>
+		<finalName>rosa</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
