@@ -1,9 +1,8 @@
-FROM openjdk:17-alpine
-ENV APP_NAME rosa
-COPY ./target/${APP_NAME}.jar  /app/${APP_NAME}.jar
-WORKDIR /app
-CMD java -jar ${APP_NAME}.jar
+FROM openjdk:17
+WORKDIR /rosa
+COPY target/rosa.jar /rosa
 EXPOSE 8080
+CMD ["java", "-jar", "rosa.jar"]
 
 
 #
