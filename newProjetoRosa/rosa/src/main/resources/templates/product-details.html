@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+</head>
+<body>
+<h1>Product Details</h1>
+<p>Name: {product.name}</p>
+<p>Status: {product.status}</p>
+<p>Destination: {product.destination}</p>
+<p>Rate of Return: {product.rateReturn}</p>
+<p>Deadline (days): {product.deadline}</p>
+<p>Administration Fee: {product.administrationFee}</p>
+<a href="/products/edit/{product.id}">Edit</a>
+<form method="post" action="/products/delete/{product.id}">
+    <input type="hidden" name="_method" value="POST">
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>

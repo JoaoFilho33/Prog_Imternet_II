@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"></html>
+<head>
+    <title>Product List</title>
+</head>
+<body>
+<h1>Product List</h1>
+<ul>
+    {for product in products}
+    <li>
+        <a href="/products/{product.id}">{product.name}</a> - Status: {product.status}
+    </li>
+    {end}
+</ul>
+<a href="/products/create">Create New Product</a>
+</body>
+</html>
