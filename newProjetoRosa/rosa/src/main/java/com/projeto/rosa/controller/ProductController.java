@@ -31,7 +31,7 @@ public class ProductController {
         Product product = productService.getProductById(id);
         if (product != null) {
             model.addAttribute("product", product);
-            return "product-details"; // Retorna o nome da página HTML a ser renderizada
+            return "product-details";
         } else {
             return "not-found"; // Página de erro para produto não encontrado
         }
