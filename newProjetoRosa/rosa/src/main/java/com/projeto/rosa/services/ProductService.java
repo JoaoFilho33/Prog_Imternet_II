@@ -53,7 +53,6 @@ public class ProductService {
         Product product = getProductById(id);
 
         if (product != null) {
-            // Altere o status do produto
             if (product.getStatus() == StatusEnum.DISPONIVEL) {
                 product.setStatus(StatusEnum.INDISPONIVEL);
             } else {
