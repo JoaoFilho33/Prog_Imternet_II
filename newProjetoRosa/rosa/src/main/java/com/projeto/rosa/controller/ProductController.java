@@ -1,6 +1,5 @@
 package com.projeto.rosa.controller;
 
-import com.projeto.rosa.StatusEnum;
 import com.projeto.rosa.dto.ProductDto;
 import com.projeto.rosa.model.Product;
 import com.projeto.rosa.services.ProductService;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Controller
 public class ProductController {
