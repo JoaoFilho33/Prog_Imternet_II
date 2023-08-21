@@ -1,72 +1,65 @@
 package com.projeto.rosa.services;
 
 import com.projeto.rosa.StatusEnum;
+import com.projeto.rosa.dto.ProductDto;
 import com.projeto.rosa.model.Product;
+import com.projeto.rosa.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class ProductService {
-    private final List<Product> products = new ArrayList<>();
+    private final ProductRepository productRepository;
 
-    public List<Product> getAllProducts() {
-        return products;
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public Product getProductById(Long id) {
-        return products.stream()
-                .filter(product -> id.equals(product.getId()))
-                .findFirst()
-                .orElse(null);
+    public void createProduct(@ModelAttribute ProductDto productDto) {
+        final var product = new Product();
+        product.setId(UUID.randomUUID());
+        product.setName(productDto.getName());
+        product.setStatus(StatusEnum.DISPONIVEL);
+        product.setDestination(productDto.getDestination());
+        product.setProfitRate(productDto.getProfitRate());
+        product.setTerm(productDto.getTerm());
+        product.setAdministrationRate(productDto.getAdministrationRate());
+
+        productRepository.save(product);
     }
 
-    public Product createProduct(Product product) {
-        Long id = generatedUniqueId();
-        product.setId(id);
-        products.add(product);
-        return product;
-    }
-
-    public Product updateProduct(Long id, Product updatedProduct) {
-        Product existingProduct = getProductById(id);
-        if (existingProduct != null) {
-            existingProduct.setName(updatedProduct.getName());
-            existingProduct.setStatus(updatedProduct.getStatus());
-
-            return existingProduct;
-        }
-        return null;
-    }
-
-    public boolean deleteProduct(Long id) {
-        Product productToRemove = getProductById(id);
-        if (productToRemove != null) {
-            products.remove(productToRemove);
-            return true;
-        }
-        return false;
-    }
-
-    public void changeProductStatus(Long id) {
+    public Product changeProductStatus(Long id) {
         Product product = getProductById(id);
 
         if (product != null) {
-            // Altere o status do produto
             if (product.getStatus() == StatusEnum.DISPONIVEL) {
                 product.setStatus(StatusEnum.INDISPONIVEL);
             } else {
                 product.setStatus(StatusEnum.DISPONIVEL);
             }
+
+            return productRepository.save(product);
         }
+
+        return null;
     }
 
-    private Long generatedUniqueId() {
-        long maxId = products.stream()
-                .mapToLong(Product::getId)
-                .max()
-                .orElse(0L);
-        return maxId + 1;
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    public List<Product> listProducts() {
+        return productRepository.findAll();
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }
