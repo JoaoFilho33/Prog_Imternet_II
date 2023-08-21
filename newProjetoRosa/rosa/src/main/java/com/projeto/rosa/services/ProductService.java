@@ -23,7 +23,7 @@ public class ProductService {
     }
 
     public void createProduct(@ModelAttribute ProductDto productDto) {
-        final var product = new Product();
+        Product product = new Product();
         product.setId(UUID.randomUUID());
         product.setName(productDto.getName());
         product.setStatus(StatusEnum.DISPONIVEL);

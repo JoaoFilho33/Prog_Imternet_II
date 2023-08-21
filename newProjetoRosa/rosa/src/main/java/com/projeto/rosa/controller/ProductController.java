@@ -24,32 +24,32 @@ public class ProductController {
     public String listProducts(Model model) {
         List<Product> productsList = productService.listProducts();
         model.addAttribute("productsList", productsList);
-        return "product-list";
+        return "products";
     }
 
     @GetMapping("/products/create")
     public String createProductForm(Model model) {
         ProductDto product = new ProductDto();
         model.addAttribute("product", product);
-        return "create-product";
+        return "create";
     }
 
     @PostMapping("/products/create")
     public String createProduct(@ModelAttribute(value = "product") ProductDto product) {
         productService.createProduct(product);
-        return "redirect:/product-list";
+        return "redirect:/products";
     }
 
-    @GetMapping("/products/delete/{id}")
+    @PostMapping("/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return "redirect:/product-list";
+        return "redirect:/products";
     }
 
-    @GetMapping("/products/changeStatus/{id}")
+    @PostMapping("/products/changeStatus/{id}")
     public String changeProductStatus(@PathVariable Long id) {
         productService.changeProductStatus(id);
-        return "redirect:/product-list";
+        return "redirect:/products";
     }
 
 }

@@ -2,11 +2,15 @@ package com.projeto.rosa.model;
 
 import com.projeto.rosa.StatusEnum;
 import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.util.UUID;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "TB_PRODUCTS")
 public class Product {
@@ -22,19 +26,6 @@ public class Product {
     private Integer profitRate;
     private Integer term;
     private Double administrationRate;
-
-    public Product(String name, StatusEnum status, String destination, Integer profitRate, Integer term, Double administrationRate) {
-        this.name = name;
-        this.status = status;
-        this.destination = destination;
-        this.profitRate = profitRate;
-        this.term = term;
-        this.administrationRate = administrationRate;
-    }
-
-    public Product(){
-    }
-
 
     public UUID getId() {
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+</head>
+<body>
+<h1>Create Product</h1>
+
+<form th:action="@{/products/create}" th:object="${product}" method="post">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" required th:field="*{name}"><br><br>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required th:field="*{status}">
+        <option value="DISPONIVEL">Disponível</option>
+        <option value="INDISPONIVEL">Indisponível</option>
+    </select><br><br>
+
+    <label for="destination">Destinação:</label>
+    <input type="text" id="destination" name="destination" required th:field="*{destination}"><br><br>
+
+    <label for="profitRate">Taxa de rentabilidade:</label>
+    <input type="number" id="profitRate" name="profitRate" required th:field="*{profitRate}"><br><br>
+
+    <label for="term">Prazo:</label>
+    <input type="number" id="term" name="term" required th:field="*{term}"><br><br>
+
+    <label for="administrationRate">Taxa de administração:</label>
+    <input type="number" id="administrationRate" name="administrationRate" required th:field="*{administrationRate}"><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a th:href="@{/products}">Voltar</a>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>List Products</title>
+</head>
+<body>
+<h1>List of Products</h1>
+
+
+<div th:each="product : ${productsList}">
+    <div><b>Name: </b><span th:text="${product.getName}"></span></div>
+    <div><b>Administration Rate: </b><span th:text="${product.getAdministrationRate}"></span></div>
+    <div><b>Term: </b><span th:text="${product.getTerm}"></span></div>
+    <div><b>Profitability Rate: </b><span th:text="${product.getProfitRate}"></span></div>
+    <div><b>Status: </b><span th:text="${product.getStatus}"></span></div>
+    <div><b>Destination: </b><span th:text="${product.getDestination}"></span></div>
+
+    <div>
+        <form th:action="@{/products/delete/{id}(id=${product.id})}" th:method="post">
+            <button type="submit">DELETE</button>
+        </form>
+    </div>
+
+  <!--  <div>
+        <form th:href="@{'/products/delete/'+${product.getId()}}" th:method="post">
+            <button>Delete</button>
+        </form>
+    </div>-->
+
+    <div>
+        <form th:action="@{/products/changeStatus/{id}(id=${product.id})}" th:method="post">
+            <button type="submit">Alterar Status</button>
+        </form>
+    </div>
+</div>
+
+<a th:href="@{/products/create}">Novo Produto</a>
+
+</body>
+</html>
